@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ProtAlphabet</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 20px;
+            background: #f0f2f5;
+        }
+
+        .fancy-button {
+            background: linear-gradient(135deg, #6a11cb, #2575fc);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            padding: 10px 20px;
+            font-size: 1.5rem;
+            font-weight: bold;
+            cursor: pointer;
+            margin: 5px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .fancy-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .fancy-button:active {
+            transform: translateY(1px);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .fancy-button div {
+            font-size: 2rem;
+        }
+
+        .mutation-options-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            justify-content: center;
+            align-items: center;
+        }
+
+        .mutation-options-content {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            max-width: 600px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .alphabet-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin-top: 15px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>ProtAlphabet</h1>
+        <h2>Escolha uma Letra</h2>
+        <button id="showAlphabetOptions" class="fancy-button" onclick="showAlphabetOptionsModal()">
+            <div><i class="fas fa-ellipsis-h"></i></div>
+        </button>
+    </div>
+
+    <!-- Modal Popup -->
+    <div id="alphabetOptionsModal" class="mutation-options-modal">
+        <div class="mutation-options-content">
+            <h2>Escolha uma Letra</h2>
+            <div id="alphabetButtons" class="alphabet-buttons"></div>
+            <button id="closeAlphabetOptionsModal" class="fancy-button">
+                <div>Fechar</div>
+            </button>
+        </div>
+    </div>
+
+    <script>
+        // Show modal
+        function showAlphabetOptionsModal() {
+            document.getElementById('alphabetOptionsModal').style.display = 'flex';
+        }
+
+        // Hide modal
+        document.getElementById('closeAlphabetOptionsModal').addEventListener('click', () => {
+            document.getElementById('alphabetOptionsModal').style.display = 'none';
+        });
+
+        // Generate alphabet buttons dynamically (A-Z)
+        const alphabetContainer = document.getElementById('alphabetButtons');
+        for (let i = 65; i <= 90; i++) {
+            const letter = String.fromCharCode(i);
+            const button = document.createElement('button');
+            button.className = 'mutation-option fancy-button';
+            button.setAttribute('data-letter', letter);
+            button.innerHTML = `<div>${letter}</div>`;
+            button.onclick = () => {
+                console.log("Selected Letter: " + letter);
+                // Add your letter handling logic here
+            };
+            alphabetContainer.appendChild(button);
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/pdbe-molstar@3.3.0/build/pdbe-molstar-light.css" />
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/pdbe-molstar@3.2.0/build/pdbe-molstar-plugin.js"></script>
+
+    <style>
+        /* Base styling for the body and content */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #ffffff;
+            color: #222;
+        }
+
+        main {
+            max-width: 960px;
+            margin: auto;
+            padding: 20px;
+        }
+
+        /* Protein structure viewer */
+        #myViewer {
+            width: 100%;
+            height: 500px;
+            margin-top: 10px;
+            border: 1px solid #ccc;
+            position: relative;
+        }
+
+            /* Reset button styling in the lower right */
+        #inicioButton {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            z-index: 10000;
+            width: 150px;
+            height: 80px;
+            font-size: 1.2rem;
+        }
+
+        #resetButton:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+
+<body>
+
+    <main>
+
+        <!-- Protein Structure Panel (stable Mutation) -->
+        <div id="myViewer" style="position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;"></div>
+        
+    </main>
+
+    <!-- Reset button to return to start.html -->
+    <button id="inicioButton" onclick="window.location.href='/'">Início</button>
+
+    <script>
+       
+
+        // Show the protein structure visualization (Mol* plugin setup)
+        var viewerInstance = new PDBeMolstarPlugin();
+        var options = {
+            customData: {
+                url: "/static/pdb/{{ traj_file }}",
+                format: "pdb"
+            },
+            alphafoldView: true,
+            trajectory: true,
+            bgColor: { r: 255, g: 255, b: 255 },
+            hideControls: true,
+            expanded: true,
+            hideCanvasControls: [
+                'selection',
+                'animation',
+                'controlToggle',
+                'controlInfo',
+                'trajectory'
+            ]
+        };
+
+        var viewerContainer = document.getElementById("myViewer");
+        viewerInstance.render(viewerContainer, options);
+
+        // Function to change frames in the trajectory
+        function change_frame(idx) {
+            const hierarchy = viewerInstance.plugin.managers.structure.hierarchy.current;
+            if (!hierarchy || !hierarchy.models || hierarchy.models.length === 0) {
+                console.warn("No structure models available.");
+                return;
+            }
+
+            let model = hierarchy.models[0].cell.transform.ref;
+            const maxFrames = hierarchy.models[0].cell.params.definition.modelIndex.converted.max;
+            if (maxFrames <= 1) {
+                console.info("Only one frame available (max: " + maxFrames + "). Frame change is not applicable.");
+                return;
+            }
+
+            let update = viewerInstance.state.build();
+            update.to(model).update({ modelIndex: idx });
+            update.commit();
+        }
+
+        viewerInstance.events.loadComplete.subscribe(() => {
+            console.log("Plugin managers:", viewerInstance.plugin.managers);
+
+            // Esconder a tela de loading assim que o carregamento do Mol* estiver completo
+            const overlay = document.getElementById("loadingOverlay");
+            if (overlay) overlay.style.display = "none";
+            
+            const hierarchy = viewerInstance.plugin.managers.structure.hierarchy.current;
+            if (!hierarchy || !hierarchy.models || hierarchy.models.length === 0) {
+                console.warn("No structure models available on load.");
+                return;
+            }
+
+            const maxFrames = hierarchy.models[0].cell.params.definition.modelIndex.converted.max;
+            console.info("Model max frames:", maxFrames);
+            if (maxFrames <= 1) {
+                console.info("Only one frame available (max: " + maxFrames + "). Frame updating skipped.");
+                return;
+            }
+            let currentFrame = 0;
+            const totalFrames = hierarchy.models[0].cell.params.definition.modelIndex.converted.max;
+
+            const frameInterval = setInterval(() => {
+                change_frame(currentFrame);
+
+                if (currentFrame >= totalFrames) {
+                    clearInterval(frameInterval);
+                }
+
+                currentFrame += 5;
+                if (currentFrame >= totalFrames) {
+                    currentFrame = totalFrames-1;
+                }
+
+            }, 100); // Adjust the interval as needed
+        });
+        
+    </script>
+
+</body>
+</html>
