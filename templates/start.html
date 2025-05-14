@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Protein Design</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <h1>if</h1>
+        <img src="your-gif.gif" alt="Centered Gif" style="max-width:100%; height:auto; margin: 20px 0;">
+        <button id="openPopup">Open Popup</button>
+    </div>
+
+    <div class="popup-overlay" id="popupOverlay">
+        <div class="popup-content">
+            <p>This is a popup!</p>
+            <button id="closePopup">Close Popup</button>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('openPopup').addEventListener('click', function() {
+            document.getElementById('popupOverlay').style.display = 'flex';
+        });
+        
+        document.getElementById('closePopup').addEventListener('click', function() {
+            document.getElementById('popupOverlay').style.display = 'none';
+        });
+    </script>
+</body>
+</html>
