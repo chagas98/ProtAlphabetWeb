@@ -21,7 +21,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 20px;
+    gap: 5px;
     width: 100%;
     max-width: 2000px;
     z-index: 1;
@@ -29,18 +29,46 @@ body {
 
 /* Header container styling */
 .header-container {
-    background-color: rgba(128, 128, 128, 0.5);
-    padding: 20px;
-    border-radius: 10px;
+    background-color: transparent;
+    padding: 10px;
+    border-radius: 5px;
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     align-items: center;
-    margin-bottom: 20px;
-    width: 20%;
-    max-width: 600px;
-    text-align: center;
-    position: relative;
+    justify-content: center; /* Center the title */
+    margin-bottom: 5px;
+    width: 100%;
+    height: 5%;
+    margin-top: 4%;
+    max-height: 100px;
+    max-width: 800px;
+    position: absolute; /* Position at the top of the page */
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
     z-index: 1;
+}
+
+/* Header text styling */
+.header-container h3 {
+    margin: 0;
+    font-size: 1.5rem;
+    font-weight: bold;
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+    color: #333;
+    white-space: nowrap;
+}
+
+/* Header image styling */
+.header-image-side {
+    display: block;
+    max-width: 20%;
+    height: auto;
+    border-radius: 5px;
+    box-shadow: none;
 }
 
 /* Side box styling */
@@ -77,14 +105,6 @@ h1.title {
     text-transform: uppercase;
     color: black;
     margin: 0 0 20px;
-}
-
-/* Header image styling */
-.header-image {
-    max-width: 50%;
-    height: auto;
-    margin-bottom: 20px;
-    z-index: 1;
 }
 
 /* Button styling */
@@ -232,8 +252,8 @@ footer img {
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
     padding: 20px; /* Inner spacing */
     margin: 20px auto; /* Center the box with margin */
-    width: 60%; /* Full width */
-    height: 70%; /* Full height */
+    width: 50%; /* Width of the box */
+    height: auto; /* Auto height to fit content */
     text-align: center; /* Center-align the text inside */
     overflow: hidden; /* Prevent content from overflowing */
     box-sizing: border-box; /* Include padding in width/height calculations */
@@ -249,22 +269,66 @@ footer img {
 .explanation-box p {
     font-size: 1.2rem; /* Standard font size for the paragraph */
     color: #555; /* Medium gray for the text */
-    margin-bottom: 15px; /* Space below the paragraph */
+    margin-bottom: 1px; /* Space below the paragraph */
     word-wrap: break-word; /* Prevent text overflow */
 }
 
 
 .image-container {
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+    margin: 0 auto; /* Center the image container */
+    padding: 0; /* Remove padding */
+    background-color: transparent; /* Transparent background */
     display: flex;
     justify-content: center;
     align-items: center;
     flex-wrap: wrap; /* Allow wrapping of images */
-    gap: 30px; /* Increased gap for more margin between images */
+    gap: 10px; /* Increased gap for more margin between images */
 }
 
-.explanation-image {
+.image-image1 {
+    width: 30%;
     max-width: 30%;
     height: auto;
     border-radius: 5px; /* Slight rounding for the image corners */
-    margin-top: 10px; /* Space above the image */
+    margin: 0; /* Remove individual margin offsets */
+}
+
+.image-image2 {
+    width: 30%;
+    max-width: 30%;
+    height: auto;
+    border-radius: 5px; /* Slight rounding for the image corners */
+    margin: 0; /* Remove individual margin offsets */
+    margin-top: 20px; /* Add margin to the top of the second image */
+}
+.terminal-block {
+    background-color: #000;
+    color: #0f0;
+    padding: 10px;
+    font-family: "Courier New", monospace;
+    border-radius: 4px;
+    margin: 20px auto;
+    width: 70%;
+
+    text-align: left;
+}
+.terminal-output {
+    min-height: 10px;
+    white-space: pre-wrap;
+    margin-bottom: 10px;
+    text-align: left;
+}
+#terminalInput {
+    width: 100%;
+    background-color: #000;
+    border: none;
+    color: #0f0;
+    font-family: "Courier New", monospace;
+    text-align: left;
+}
+#terminalInput:focus {
+    outline: none;
 }

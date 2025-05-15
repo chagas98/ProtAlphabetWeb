@@ -27,13 +27,9 @@
 
     <!-- Explanation Box -->
     <div class="explanation-box">
-        <h3>Sobre a Atividade</h3>
+        <h1>Sim!</h1>
+        <h3>Por exemplo, modelos de difusão podem ser implementados para gerar proteínas com diferentes estruturas!</h3>
         <p>Escolha uma letra do alfabeto para visualizar a trajetória correspondente. Clique no botão abaixo para começar.</p>
-        <div class="image-container"></div>
-            <img src="{{ url_for('static', filename='images/noisy_frame.png') }}" alt="Imagem 1" class="explanation-image">
-            <img src="{{ url_for('static', filename='imaimage2.png') }}" alt="Imagem 2" class="explanation-image">
-            <img src="{{ url_for('static', filename='images/diffusion_process.gif') }}" alt="Explicação da Atividade" class="explanation-image">
-        </div>
     </div>
 
     <!-- Start button -->
@@ -56,6 +52,12 @@
         // Hide modal
         document.getElementById('closeAlphabetOptionsModal').addEventListener('click', () => {
             document.getElementById('alphabetOptionsModal').style.display = 'none';
+        });
+
+        // Print the phrase automatically on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            const output = document.getElementById('terminalOutput');
+            output.innerText += '> Gerar uma imagem de um dos maiores complexos científicos brasileiro.\n';
         });
 
         // Generate alphabet buttons dynamically (A-Z)

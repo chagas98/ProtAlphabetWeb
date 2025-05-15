@@ -50,6 +50,47 @@
         #resetButton:hover {
             background-color: #45a049;
         }
+
+        /* Popup container */
+        .popup {
+            display: flex;
+            position: fixed;
+            z-index: 9999;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: transparent; /* Transparent background */
+            align-items: flex-end; /* Align popup content at the bottom */
+            justify-content: center;
+            pointer-events: none; /* Allow clicks to pass through */
+        }
+
+        /* Keyframe animation for slide-up effect */
+        @keyframes popupSlideUp {
+            from {
+            transform: translateY(100%);
+            opacity: 0;
+            }
+            to {
+            transform: translateY(0);
+            opacity: 1;
+            }
+        }
+
+        /* Popup content */
+        .popup-content {
+            background-color: #fff;
+            border-radius: 10px;
+            width: 100%;
+            height: 5%;
+            max-width: 1000px;
+            text-align: center;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            animation: popupSlideUp 0.5s ease-out forwards;
+            pointer-events: none; /* Allow clicks to pass through */
+        }
     </style>
 </head>
 
@@ -60,10 +101,18 @@
         <!-- Protein Structure Panel (stable Mutation) -->
         <div id="myViewer" style="position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;"></div>
         
-    </main>
 
-    <!-- Reset button to return to start.html -->
-    <button id="inicioButton" onclick="window.location.href='/'">Início</button>
+        <!-- Reset button to return to start.html -->
+        <button id="inicioButton" onclick="window.location.href='/'">Início</button>
+
+        <!-- Popup modal -->
+        <div id="popup" class="popup">
+            <div class="popup-content">
+            <p>A trajetória de difusão foi gerada utilizando Chroma. Agradecemos a Generate:Biomedicines por disponibilizar os modelos.</p>
+            </div>
+        </div>
+
+    </main>
 
     <script>
        
@@ -92,7 +141,7 @@
 
         var viewerContainer = document.getElementById("myViewer");
         viewerInstance.render(viewerContainer, options);
-
+        
         // Function to change frames in the trajectory
         function change_frame(idx) {
             const hierarchy = viewerInstance.plugin.managers.structure.hierarchy.current;
@@ -113,12 +162,16 @@
             update.commit();
         }
 
+
         viewerInstance.events.loadComplete.subscribe(() => {
             console.log("Plugin managers:", viewerInstance.plugin.managers);
-
-            // Esconder a tela de loading assim que o carregamento do Mol* estiver completo
-            const overlay = document.getElementById("loadingOverlay");
-            if (overlay) overlay.style.display = "none";
+            for (const s of viewerInstance.plugin.managers.structure.hierarchy.current.structures) {
+                            viewerInstance.plugin.managers.structure.component.updateRepresentationsTheme(s.components, {
+                            color: "sequence-id"
+                        });
+                    }
+            viewerInstance.visual.toggleSpin(true);
+            
             
             const hierarchy = viewerInstance.plugin.managers.structure.hierarchy.current;
             if (!hierarchy || !hierarchy.models || hierarchy.models.length === 0) {
@@ -142,7 +195,7 @@
                     clearInterval(frameInterval);
                 }
 
-                currentFrame += 5;
+                currentFrame += 2;
                 if (currentFrame >= totalFrames) {
                     currentFrame = totalFrames-1;
                 }

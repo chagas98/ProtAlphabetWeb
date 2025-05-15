@@ -16,31 +16,34 @@
         <p><a href="https://lnbio.cnpem.br/" target="_blank">Site LNBio</a></p>
     </div>
     
-    <!-- Content container with side boxes and header container -->
-    <div class="content-container">
-        <!-- Left side box -->
-        <div class="side-box">
-            <h2>O que é Design de Proteínas?</h2>
-            <p>Uma breve descrição sobre design de proteínas.</p>
-        </div>
 
-        <!-- Header container with title and image -->
-        <div class="header-container">
-            <h1 class="title">Grupo de Design de Proteínas</h1>
-            <img src="{{ url_for('static', filename='images/carimbo.png') }}" alt="Header Image" class="header-image">
-        </div>
+    <!-- Header container with title and image -->
+    <div class="header-container">
+        <h1 class="title">Grupo de Design de Proteínas</h1>
+        <img src="{{ url_for('static', filename='images/carimbo.png') }}" alt="Header Image" class="header-image-side">
+    </div>
+    
+    <!-- Explanation Box -->
+    <div class="explanation-box">
+        <h2>A inteligência artificial utilizada para gerar novas imagens pode ser aplicado em proteínas?</h2>
+        <p>Escolha uma letra do alfabeto para visualizar a trajetória correspondente. Clique no botão abaixo para começar.</p>
 
-        <!-- Right side box -->
-        <div class="side-box">
-            <h2>Otimize sua proteína em tempo real!</h2>
-            <p>Veja como pequenas mudanças podem gerar grandes resultados na estabilidade estrutural.
-               Essa atividade busca explorar mutações que fortalecem a estrutura da sua proteína.</p>
+            <!-- Terminal Block -->
+        <div id="terminalBlock" class="terminal-block">
+            <div class="terminal-output" id="terminalOutput"></div>
+            <input type="text" id="terminalInput" placeholder="Type your command..." />
+        </div>
+        <div class="image-container">
+            <img src="{{ url_for('static', filename='images/noisy_frame.png') }}" alt="Imagem 1" class="image-image1">
+            <img src="{{ url_for('static', filename='images/diffusion.jpeg') }}" alt="Imagem 2" class="image-image2">
+            <img src="{{ url_for('static', filename='images/diffusion_process.gif') }}" alt="Explicação da Atividade" class="image-image1">
         </div>
     </div>
 
+    
     <!-- Start button -->
     <button id="inicioButton" class="fancy-button">
-        <div><i class="fas fa-ellipsis-h"></i> Iniciar</div>
+        <div><i class="fas fa-ellipsis-h"></i>Iniciar</div>
     </button>
 
     <!-- Footer -->
@@ -49,10 +52,18 @@
     </footer>
 
     <script>
+        
+        // Print the phrase automatically on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            const output = document.getElementById('terminalOutput');
+            output.innerText += '> Gerar uma imagem de um dos maiores complexos científicos brasileiro.\n';
+        });
+        
         // Redirect to the trajectory page when the start button is clicked
         document.getElementById('inicioButton').addEventListener('click', () => {
             window.location.href = '/start';
         });
+
     </script>
 
 </body>
