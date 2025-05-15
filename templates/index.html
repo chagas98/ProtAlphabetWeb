@@ -15,21 +15,6 @@
         <img src="{{ url_for('static', filename='images/lnbiosite.png') }}" alt="QR Code">
         <p><a href="https://lnbio.cnpem.br/" target="_blank">Site LNBio</a></p>
     </div>
-
-    <!-- Modal Popup -->
-    <form id="letterForm" action="/traj">
-        <!-- Hidden input to hold the mutation value -->
-        <input type="hidden" name="letterSel" id="letterValue">
-        <div id="alphabetOptionsModal" class="mutation-options-modal">
-            <div class="mutation-options-content">
-                <h2>Escolha uma Letra</h2>
-                <div id="alphabetButtons" class="alphabet-buttons"></div>
-                <button id="closeAlphabetOptionsModal" class="fancy-button"  type="button">
-                    <div>Fechar</div>
-                </button>
-            </div>
-        </div>
-    </form>
     
     <!-- Content container with side boxes and header container -->
     <div class="content-container">
@@ -54,8 +39,8 @@
     </div>
 
     <!-- Start button -->
-    <button id="showAlphabetOptions" class="fancy-button" onclick="showAlphabetOptionsModal()">
-        <div><i class="fas fa-ellipsis-h"></i> Escolher Letra</div>
+    <button id="inicioButton" class="fancy-button">
+        <div><i class="fas fa-ellipsis-h"></i> Iniciar</div>
     </button>
 
     <!-- Footer -->
@@ -64,37 +49,9 @@
     </footer>
 
     <script>
-        
-        // Show modal
-        function showAlphabetOptionsModal() {
-            document.getElementById('alphabetOptionsModal').style.display = 'flex';
-        }
-
-        // Hide modal
-        document.getElementById('closeAlphabetOptionsModal').addEventListener('click', () => {
-            document.getElementById('alphabetOptionsModal').style.display = 'none';
-        });
-
-        // Generate alphabet buttons dynamically (A-Z)
-        const alphabetContainer = document.getElementById('alphabetButtons');
-        for (let i = 65; i <= 90; i++) {
-            const letter = String.fromCharCode(i);
-            const button = document.createElement('button');
-            button.className = 'mutation-option fancy-button';
-            button.setAttribute('data-letter', letter);
-            button.innerHTML = `<div>${letter}</div>`;
-            // Dentro do loop de criação dos botões
-            button.onclick = () => {
-                const letter = button.getAttribute('data-letter');
-                console.log("Selected Letter: " + letter);
-                window.location.href = `/traj?letterSel=${letter}`;
-            };
-
-            alphabetContainer.appendChild(button);
-        }
-
-        document.getElementById('letterForm').addEventListener('submit', (event) => {
-            event.preventDefault(); // Prevent the default form submission
+        // Redirect to the trajectory page when the start button is clicked
+        document.getElementById('inicioButton').addEventListener('click', () => {
+            window.location.href = '/start';
         });
     </script>
 

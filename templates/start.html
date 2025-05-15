@@ -8,27 +8,78 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
-    <div class="container">
-        <h1>if</h1>
-        <img src="your-gif.gif" alt="Centered Gif" style="max-width:100%; height:auto; margin: 20px 0;">
-        <button id="openPopup">Open Popup</button>
-    </div>
 
-    <div class="popup-overlay" id="popupOverlay">
-        <div class="popup-content">
-            <p>This is a popup!</p>
-            <button id="closePopup">Close Popup</button>
+    <!-- Modal Popup -->
+    <form id="letterForm" action="/traj">
+        <!-- Hidden input to hold the mutation value -->
+        <input type="hidden" name="letterSel" id="letterValue">
+        <div id="alphabetOptionsModal" class="mutation-options-modal">
+            <div class="mutation-options-content">
+                <h2>Escolha uma Letra</h2>
+                <div id="alphabetButtons" class="alphabet-buttons"></div>
+                <button id="closeAlphabetOptionsModal" class="closealphabet-button"  type="button">
+                    <div>Fechar</div>
+                </button>
+            </div>
+        </div>
+    </form>
+
+
+    <!-- Explanation Box -->
+    <div class="explanation-box">
+        <h3>Sobre a Atividade</h3>
+        <p>Escolha uma letra do alfabeto para visualizar a trajetória correspondente. Clique no botão abaixo para começar.</p>
+        <div class="image-container"></div>
+            <img src="{{ url_for('static', filename='images/noisy_frame.png') }}" alt="Imagem 1" class="explanation-image">
+            <img src="{{ url_for('static', filename='imaimage2.png') }}" alt="Imagem 2" class="explanation-image">
+            <img src="{{ url_for('static', filename='images/diffusion_process.gif') }}" alt="Explicação da Atividade" class="explanation-image">
         </div>
     </div>
 
+    <!-- Start button -->
+    <button id="showAlphabetOptions" class="fancy-button" onclick="showAlphabetOptionsModal()">
+        <div><i class="fas fa-ellipsis-h"></i> Escolher Letra</div>
+    </button>
+    
+    <!-- Return button -->
+    <button id="returnButton" class="fancy-button" onclick="window.location.href='/'">
+        <div><i class="fas fa-arrow-left"></i> Voltar</div>
+    </button>
+
     <script>
-        document.getElementById('openPopup').addEventListener('click', function() {
-            document.getElementById('popupOverlay').style.display = 'flex';
-        });
         
-        document.getElementById('closePopup').addEventListener('click', function() {
-            document.getElementById('popupOverlay').style.display = 'none';
+        // Show modal
+        function showAlphabetOptionsModal() {
+            document.getElementById('alphabetOptionsModal').style.display = 'flex';
+        }
+
+        // Hide modal
+        document.getElementById('closeAlphabetOptionsModal').addEventListener('click', () => {
+            document.getElementById('alphabetOptionsModal').style.display = 'none';
         });
+
+        // Generate alphabet buttons dynamically (A-Z)
+        const alphabetContainer = document.getElementById('alphabetButtons');
+        for (let i = 65; i <= 90; i++) {
+            const letter = String.fromCharCode(i);
+            const button = document.createElement('button');
+            button.className = 'mutation-option alphabet-button';
+            button.setAttribute('data-letter', letter);
+            button.innerHTML = `<div>${letter}</div>`;
+            // Dentro do loop de criação dos botões
+            button.onclick = () => {
+                const letter = button.getAttribute('data-letter');
+                console.log("Selected Letter: " + letter);
+                window.location.href = `/traj?letterSel=${letter}`;
+            };
+
+            alphabetContainer.appendChild(button);
+        }
+
+        document.getElementById('letterForm').addEventListener('submit', (event) => {
+            event.preventDefault(); // Prevent the default form submission
+        });
+
     </script>
 </body>
 </html>
