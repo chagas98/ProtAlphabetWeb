@@ -109,7 +109,7 @@ h1.title {
 
 /* Button styling */
 .start-button {
-    background-color: #4CAF50;
+    background-color: #4b76eb;
     color: white;
     padding: 20px 40px;
     font-size: 2rem;
@@ -163,7 +163,7 @@ footer img {
 }
 
 .fancy-button {
-    background: linear-gradient(135deg, #6aeb6e, #4CAF50);
+    background: linear-gradient(135deg, #6aeb6e, #4b76eb);
     color: white;
     border: none;
     border-radius: 8px;
@@ -217,7 +217,7 @@ footer img {
 }
 
 .alphabet-button {
-    background: linear-gradient(135deg, #6aeb6e, #4CAF50);
+    background: linear-gradient(135deg, #6aeb6e, #4b76eb);
     color: white;
     border: none;
     border-radius: 8px;
@@ -232,7 +232,7 @@ footer img {
 }
 
 .closealphabet-button {
-    background: linear-gradient(135deg, #6aeb6e, #4CAF50);
+    background: linear-gradient(135deg, #6aeb6e, #4b76eb);
     color: white;
     border: none;
     border-radius: 8px;
@@ -329,6 +329,7 @@ footer img {
     font-family: "Courier New", monospace;
     text-align: left;
 }
+
 #terminalInput:focus {
     outline: none;
 }

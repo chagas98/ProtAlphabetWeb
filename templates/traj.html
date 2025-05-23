@@ -35,7 +35,7 @@
             position: fixed;
             bottom: 20px;
             right: 20px;
-            background-color: #4CAF50;
+            background-color: #4b76eb;
             color: white;
             border: none;
             padding: 10px 20px;
@@ -102,6 +102,24 @@
         <div id="myViewer" style="position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;"></div>
         
 
+        <div id="loadingOverlay" style="
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        background-color: rgba(255,255,255,0.8);
+        z-index: 10000;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-family: Arial, sans-serif;
+        font-size: 1.8rem;
+        color: #333;
+        ">
+            Carregando estrutura...
+        </div>
+        
         <!-- Reset button to return to start.html -->
         <button id="inicioButton" onclick="window.location.href='/'">Início</button>
 
@@ -115,7 +133,6 @@
     </main>
 
     <script>
-       
 
         // Show the protein structure visualization (Mol* plugin setup)
         var viewerInstance = new PDBeMolstarPlugin();
@@ -172,6 +189,9 @@
                     }
             viewerInstance.visual.toggleSpin(true);
             
+            // Esconder a tela de loading assim que o carregamento do Mol* estiver completo
+            const overlay = document.getElementById("loadingOverlay");
+            if (overlay) overlay.style.display = "none";
             
             const hierarchy = viewerInstance.plugin.managers.structure.hierarchy.current;
             if (!hierarchy || !hierarchy.models || hierarchy.models.length === 0) {
@@ -195,7 +215,7 @@
                     clearInterval(frameInterval);
                 }
 
-                currentFrame += 2;
+                currentFrame += 5;
                 if (currentFrame >= totalFrames) {
                     currentFrame = totalFrames-1;
                 }

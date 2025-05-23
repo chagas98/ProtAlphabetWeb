@@ -25,15 +25,12 @@
     
     <!-- Explanation Box -->
     <div class="explanation-box">
-        <h2>Você sabia que os mesmos modelos de Inteligência Artificial usados para gerar imagens a partir de texto também podem ser empregados para criar novas estruturas de proteínas?</h2>
+        <h1>Você sabia que os mesmos modelos de <strong style="color: #4b76eb;">Inteligência Artificial</strong> usados para gerar imagens a partir de texto também podem ser empregados para criar novas estruturas de <strong style="color: #4b76eb;">proteínas</strong>?</h1>
         <p></p>
-        <p>Eles são chamados modelos de difusão!</p>
 
-            <!-- Terminal Block -->
-        <div id="terminalBlock" class="terminal-block">
-            <div class="terminal-output" id="terminalOutput"></div>
-            <input type="text" id="terminalInput" placeholder="Type your command..." />
-        </div>
+        <h2>Eles são chamados modelos de <strong style="color: #4b76eb;">difusão</strong>!</h2>
+        <p></p>
+        <p>Em modelos de <strong style="color: #4b76eb;">difusão</strong>, uma imagem, por exemplo, é gradualmente destruída pela adição de ruído até se tornar totalmente ruidosa. Esse processo gera milhares de imagens com diferentes niveis de ruído, que são utilizadas para treinar uma <strong style="color: #4b76eb;">Inteligência Artificial</strong> capaz de prever qual seriam imagens reais a partir de uma versão com ruído. Assim, a IA aprende a gerar novas imagens.</p>
         <div class="image-container">
             <img src="{{ url_for('static', filename='images/noisy_frame.png') }}" alt="Imagem 1" class="image-image1">
             <img src="{{ url_for('static', filename='images/diffusion.jpeg') }}" alt="Imagem 2" class="image-image2">

@@ -21,4 +21,4 @@ def traj():
     return render_template("traj.html", traj_file=traj_file)
 
 if __name__ == "__main__":
-    app.run()
+    app.run(debug=True)
