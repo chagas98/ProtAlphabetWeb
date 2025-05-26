@@ -46,7 +46,7 @@
 
     <!-- Botão pequeno no canto inferior esquerdo para abrir outra página -->
     <button id="openPageButton" class="CheckProtein">Proteína 3D</button>
-    
+
     <!-- Footer -->
     <footer>
         <img src="{{ url_for('static', filename='images/logo.png') }}" alt="logolnbio">
@@ -63,6 +63,11 @@
         // Redirect to the trajectory page when the start button is clicked
         document.getElementById('inicioButton').addEventListener('click', () => {
             window.location.href = '/start';
+        });
+
+        // Redireciona para "outra.html" ao clicar no botão pequeno
+        document.getElementById("openPageButton").addEventListener("click", function() {
+            window.location.href = "/proteina3d";
         });
 
     </script>
