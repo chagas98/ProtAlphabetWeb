@@ -333,3 +333,17 @@ footer img {
 #terminalInput:focus {
     outline: none;
 }
+
+.CheckProtein {
+    position: fixed;
+    bottom: 13%;
+    left: 10px;
+    padding: 10px 20px;
+    font-size: 1.5rem;
+    background: linear-gradient(135deg, #6aeb6e, #4b76eb);
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    z-index: 3;
+}
