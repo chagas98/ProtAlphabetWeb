@@ -2,7 +2,7 @@ from flask import Flask, render_template, request, redirect, url_for
 
 app = Flask(__name__)
 
-TOPOL_FILE = "GH1_AF_renum.pdb"  # arquivo PDB original
+TOPOL_FILE = "top7.pdb"  # arquivo PDB original
 
 
 @app.route("/", methods=["GET"])

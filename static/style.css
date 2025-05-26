@@ -65,7 +65,9 @@ body {
 /* Header image styling */
 .header-image-side {
     display: block;
-    max-width: 20%;
+    top: 0;
+    left: 0;
+    max-width: 15%;
     height: auto;
     border-radius: 5px;
     box-shadow: none;
@@ -252,7 +254,7 @@ footer img {
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
     padding: 20px; /* Inner spacing */
     margin: 20px auto; /* Center the box with margin */
-    width: 50%; /* Width of the box */
+    width: 60%; /* Width of the box */
     height: auto; /* Auto height to fit content */
     text-align: center; /* Center-align the text inside */
     overflow: hidden; /* Prevent content from overflowing */
@@ -260,14 +262,14 @@ footer img {
 }
 
 .explanation-box h3 {
-    font-size: 1.8rem; /* Slightly larger font for the heading */
+    font-size: 2rem; /* Slightly larger font for the heading */
     color: #333; /* Darker color for the heading */
     margin-bottom: 10px; /* Space below the heading */
     word-wrap: break-word; /* Ensure long words break to fit inside the box */
 }
 
 .explanation-box p {
-    font-size: 1.2rem; /* Standard font size for the paragraph */
+    font-size: 1.5rem; /* Standard font size for the paragraph */
     color: #555; /* Medium gray for the text */
     margin-bottom: 1px; /* Space below the paragraph */
     word-wrap: break-word; /* Prevent text overflow */
@@ -275,9 +277,9 @@ footer img {
 
 
 .image-container {
-    width: 100%;
-    max-width: 100%;
-    height: auto;
+    width: 60%;
+    max-width: 60%;
+    height: 20%;
     margin: 0 auto; /* Center the image container */
     padding: 0; /* Remove padding */
     background-color: transparent; /* Transparent background */
